@@ -65,7 +65,8 @@ class ApplicationTests {
 	void returnsAFormToAddNewBooks() throws Exception{
 		mockMvc.perform(get("/books/new"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("/books/new"));
+				.andExpect(view().name("/books/edit"))
+				.andExpect(model().attribute("title", "Create new book"));
 	}
 
 	@Test
