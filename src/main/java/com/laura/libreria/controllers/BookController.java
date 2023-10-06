@@ -9,6 +9,8 @@ import com.laura.libreria.repositories.BookRepository;
 import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -33,6 +35,12 @@ public class BookController {
         Book book = new Book();
         model.addAttribute("book", book);
         return "/books/new";
+    }
+
+    @PostMapping("/books/new")
+    String addBook(@ModelAttribute Book book){
+        bookRepository.save(book);
+        return ("redirect:/books");
     }
     
 }
