@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 import com.laura.libreria.repositories.Book;
 import com.laura.libreria.repositories.BookRepository;
@@ -17,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.ArgumentMatchers.contains;
@@ -26,6 +28,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 
 
@@ -87,6 +91,15 @@ class ApplicationTests {
         assertEquals("J.K. Rowling", createdBook.getAuthor());
         assertEquals("Fantasia", createdBook.getCategory());
     } 
+
+	@Test
+	void allowsToDeleteABook()throws Exception {
+		Book book = bookRepository.save(new Book("Harry Potter y la piedra filosofal", "J.K. Rowling", "Fantasia"));
+		mockMvc.perform(get("/books/delete/" + book.getId()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/books"));
+				assertThat(bookRepository.findById(book.getId()), equalTo(Optional.empty()));
+	}
 }
 
 
