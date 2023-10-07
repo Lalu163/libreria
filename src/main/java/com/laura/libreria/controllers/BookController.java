@@ -51,5 +51,11 @@ public class BookController {
         bookRepository.save(book);
         return ("redirect:/books");
     }
+
+    @GetMapping("/books/delete/{id}")
+    String remove(Model model, @PathVariable Long id){
+        bookRepository.deleteById(id);
+        return ("redirect:/books");
+    }
     
 }
