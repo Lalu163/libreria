@@ -16,17 +16,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -81,7 +80,7 @@ class ApplicationTests {
 		.param("category", "Fantasia")
 		)
 	  .andExpect(status().is3xxRedirection())
-	  .andExpect(MockMvcResultMatchers.redirectedUrl("/books"));
+	  .andExpect(redirectedUrl("/books"));
 
         List<Book> existingBooks = (List<Book>) bookRepository.findAll();
         assertEquals(1, existingBooks.size());
