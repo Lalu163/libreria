@@ -2,7 +2,6 @@ package com.laura.libreria.repositories;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
@@ -11,7 +10,6 @@ import jakarta.annotation.PostConstruct;
 public class SampleDataLoader {
     private BookRepository bookRepository;
 
-    @Autowired
     public SampleDataLoader(BookRepository bookRepository){
         this.bookRepository = bookRepository;
     }
