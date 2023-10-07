@@ -1,6 +1,6 @@
 package com.laura.libreria.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 
 import com.laura.libreria.repositories.Book;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BookController {
     private BookRepository bookRepository;
 
-    @Autowired
     public BookController(BookRepository bookRepository){
         this.bookRepository = bookRepository;
     }
